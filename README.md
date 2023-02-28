@@ -1,2 +1,1 @@
-# data_viz_01
-Visualization of Data Elements through D3
+# D3 Project Starter Template
