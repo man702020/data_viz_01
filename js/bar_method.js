@@ -5,7 +5,7 @@ class BarChartMethod{
       parentElement: _config.parentElement,
       containerWidth: _config.containerWidth || 500,
       containerHeight: _config.containerHeight || 140,
-      margin: { top: 20, bottom: 40, right: 20, left: 70 },
+      margin: { top: 50, bottom: 50, right: 20, left: 70 },
       tooltipPadding: _config.tooltipPadding || 15
     }
 
@@ -73,7 +73,7 @@ class BarChartMethod{
       vis.chart.append('text')
         .attr('class', 'axis-label')
         .attr('x', vis.width / 2)
-        .attr('y', vis.height + 30)
+        .attr('y', vis.height + 40)
         .style('text-anchor', 'middle')
         .text('Discovery Method');
 
@@ -102,6 +102,7 @@ class BarChartMethod{
         .attr('x2', 0)
         .attr('y2', vis.height);
 
+      
       vis.updateVis();
       
   }

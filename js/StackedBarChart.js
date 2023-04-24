@@ -1,25 +1,19 @@
-class BarChartGroup{
 
+class stackedBar{
   constructor(_config, _data) {
     this.config = {
       parentElement: _config.parentElement,
-      containerWidth: _config.containerWidth || 500,
-      containerHeight: _config.containerHeight || 140,
-      margin: { top: 40, bottom: 80, right: 20, left: 70 },
-      tooltipPadding: _config.tooltipPadding || 15
+      containerWidth: 350,
+      containerHeight: 500,
+      margin: {top: 50, right: 10, bottom: 80, left: 70},
     }
-
     this.data = _data;
-
-    // Call a class function
     this.initVis();
   }
-
+  
   initVis() {
-      
-    let vis = this; 
+    let vis = this;
 
-        // Calculate inner chart size. Margin specifies the space around the actual chart.
     vis.width = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
     vis.height = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
 
@@ -34,6 +28,7 @@ class BarChartGroup{
     // Initialize axes
     vis.xAxis = d3.axisBottom(vis.xScale);
     vis.yAxis = d3.axisLeft(vis.yScale).ticks(6);
+
     // Define size of SVG drawing area
     vis.svg = d3.select(vis.config.parentElement)
         .attr('width', vis.config.containerWidth)
@@ -47,68 +42,67 @@ class BarChartGroup{
     vis.xAxisG = vis.chart.append('g')
         .attr('class', 'axis x-axis')
         .attr('transform', `translate(0,${vis.height})`);
-
+    
     // Append y-axis group
     vis.yAxisG = vis.chart.append('g')
         .attr('class', 'axis y-axis');
 
+    // Initialize stack generator and specify the categories or layers
+    // that we want to show in the chart
     vis.stack = d3.stack()
-      .keys(['yValue', 'zValue']);
+        .keys(['yValue', 'zValue','aValue']);
+    
 
     vis.color = d3.scaleOrdinal()
-      .domain(['yValue', 'zValue'])
-      .range(["#2196F3","#F44336"]);
+      .domain(['yValue', 'zValue','aValue'])
+      .range(["#FF0000","#00FF00","#0000FF"]);
 
     vis.svg.selectAll("legdots")
-      .data(['yValue', 'zValue'])
+      .data(['yValue', 'zValue','aValue'])
       .enter()
       .append("circle")
-        .attr("cx", function(d,i){ return vis.config.margin.left + 150 + i*80})
+        .attr("cx", function(d,i){ return vis.config.margin.left + 30 + i*80})
         .attr("cy", vis.config.margin.top + vis.height + 30)
         .attr("r", 5)
         .style("fill", function(d){ return vis.color(d)})
 
         // Add x-axis label
-     vis.chart.append('text')
+      vis.chart.append('text')
         .attr('class', 'axis-label')
         .attr('x', vis.width / 2)
-        .attr('y', vis.height + 65)
+        .attr('y', vis.height + 55)
         .style('text-anchor', 'middle')
-        .text('Spectral Type');
+        .text('Months');
 
       // Add y-axis label
-     vis.chart.append('text')
+      vis.chart.append('text')
         .attr('class', 'axis-label')
         .attr('x', -vis.height / 2)
         .attr('y', -40)
         .style('text-anchor', 'middle')
         .attr('transform', 'rotate(-90)')
-        .text('Habitable and Unhabitable System');
+        .text('Number of Calls');
 
-    vis.svg.append('text')
-        .attr('class', 'chart-title')
-        .attr('x', vis.config.containerWidth / 2+50)
-        .attr('y', vis.config.margin.top / 2+10)
-        .style('text-anchor', 'middle')
-        .style('font-weight', 'bold')
-        .text('Habitable vs Unhabitable Systems');
 
     vis.svg.selectAll("leglabels")
-      .data(['yValue', 'zValue'])
+      .data(['yValue', 'zValue','aValue'])
       .enter()
       .append("text")
-
-        .attr("x", function(d,i){ return vis.config.margin.left + i*80 + 160})
+        .attr("x", function(d,i){ return vis.config.margin.left + i*80 + 40})
         .attr("y", vis.config.margin.top + vis.height + 30) // 100 is where the first dot appears. 25 is the distance between dots
         .style("fill", function(d){ return vis.color(d)})
         .text(function(d){ 
           if(d=='yValue')
           {
-            return 'Habitable'
+            return 'Open'
+          }
+          else if(d=='zValue')
+          {
+            return 'Closed'
           }
           else
           {
-            return 'Unhabitable'
+            return 'New'
           }
         })
         //.attr('font-family', 'sans-serif')
@@ -116,69 +110,40 @@ class BarChartGroup{
         .attr("text-anchor", "left")
         .style("alignment-baseline", "middle")
 
+
     vis.updateVis();
 
   }
 
 
-  //leave this empty for now
- updateVis() { 
+  updateVis() {
     let vis = this;
 
-    vis.xScale.domain(['A','F','G','K','M']);
-    vis.yScale.domain([0,800]);
+    vis.xScale.domain(["Jan","Feb","Mar", "Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"]);
+    vis.yScale.domain([0,6000]);
 
+    // Call stack generator on the dataset
     vis.stackedData = vis.stack(vis.data);
 
     vis.renderVis();
- }
+  }
 
+  renderVis() {
+    let vis = this;
 
- //leave this empty for now...
- renderVis() { 
-  
-  let vis=this; 
+    console.log(vis.stackedData);
 
-  vis.rectangles= vis.chart.selectAll('category')
-          .data(vis.stackedData)
-        .join('g')
-          .attr('class', d => `category cat-${d.key}`)
-          .attr('fill', d=>vis.color(d.key))
-        .selectAll('rect')
-          .data(d => d)
-        .join('rect')
-          .attr('x', d => vis.xScale(d.data.xValue))
-          .attr('y', d => vis.yScale(d[1]))
-          .attr('height', d => vis.yScale(d[0]) - vis.yScale(d[1]))
-          .attr('width', vis.xScale.bandwidth());
-        
+    //vis.groups = vis.svg.selectAll(".bars")
+      //.data(vis.stackedData)
+        //.join("g")
+        //.attr("class", "bars")
+        //.style("fill", d => vis.color(d.key));
 
-    vis.rectangles
-      .on('mouseover', (event,d) => {
-        console.log("User on impact");
-
-        d3.select('#tooltip')
-        .style('display', 'block')
-        .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
-        .style('top', (event.pageY + vis.config.tooltipPadding) + 'px')
-        .html(` 
-          <div class="tooltip-title">Spectral Type: ${d.data.xValue}</div>
-          <ul>
-            <li>Habitable Planets: ${d.data.yValue}</li>
-            <li>Unhabitable Planets: ${d.data.zValue}</li>
-          </ul>
-        `);
-      })
-    .on('mouseleave', () => {
-      d3.select('#tooltip').style('display', 'none');
-    });
-    vis.xAxisG.call(vis.xAxis);
-    vis.yAxisG.call(vis.yAxis);
-    /*
-        vis.rectangles=vis.chart.selectAll('.category')
+    const rect = vis.chart.selectAll('category')
         .data(vis.stackedData)
       .join('g')
         .attr('class', d => `category cat-${d.key}`)
+        .attr('fill', d=>vis.color(d.key))
       .selectAll('rect')
         .data(d => d)
       .join('rect')
@@ -186,36 +151,32 @@ class BarChartGroup{
         .attr('y', d => vis.yScale(d[1]))
         .attr('height', d => vis.yScale(d[0]) - vis.yScale(d[1]))
         .attr('width', vis.xScale.bandwidth())
-        .attr("fill", d =>vis.color(d.key))
-        .attr("border",1)
-        .attr('opacity','.9')
-        .attr('stroke-width', 1)
-        .attr('stroke', 'black');
-
-        vis.rectangles
-          .on('mouseover', (event,d) => {
+        /*
+        .on('mouseover', (event,d) => {
             console.log("User on impact");
-
-            d3.select('#tooltip')
+            d3.select('#tooltiptest')
             .style('display', 'block')
             .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
             .style('top', (event.pageY + vis.config.tooltipPadding) + 'px')
             .html(` 
-              <div class="tooltip-title">Spectral Type: ${d.data.xValue}</div>
+              <div class="tooltiptest-title">Month: ${d.data.xValue}</div>
               <ul>
-                <li>Habitable Planets: ${d.data.yValue}</li>
-                <li>Unhabitable Planets: ${d.data.zValue}</li>
+                <li>Open: ${d.data.yValue}</li>
+                <li>Closed: ${d.data.zValue}</li>
+                <li>New: ${d.data.aValue}</li>;
+                <li>Total:${d.data.yValue+d.data.zValue+d.data.aValue}</li>
               </ul>
             `);
           })
         .on('mouseleave', () => {
           d3.select('#tooltip').style('display', 'none');
         });
-    */
+        */
 
-    
+    enableTooltip(rect, (d) => d.tooltip);
 
-
+    // Update the axes
+    vis.xAxisG.call(vis.xAxis);
+    vis.yAxisG.call(vis.yAxis);
+  }
 }
-}
-

@@ -5,7 +5,7 @@ class BarChartType{
       parentElement: _config.parentElement,
       containerWidth: _config.containerWidth || 500,
       containerHeight: _config.containerHeight || 140,
-      margin: { top: 20, bottom: 40, right: 20, left: 70 },
+      margin: { top: 50, bottom: 50, right: 20, left: 70 },
       tooltipPadding: _config.tooltipPadding || 15
     }
 
@@ -72,7 +72,7 @@ class BarChartType{
       vis.chart.append('text')
         .attr('class', 'axis-label')
         .attr('x', vis.width / 2)
-        .attr('y', vis.height + 30)
+        .attr('y', vis.height + 40)
         .style('text-anchor', 'middle')
         .text('Type of Spectral System');
 
@@ -145,7 +145,7 @@ class BarChartType{
         .style('opacity', 1)
         .attr('class', 'bar')
         .attr('x', d => vis.xScale(vis.xValue(d)))
-        .attr('width', vis.xScale.bandwidth())
+        .attr('width', vis.xScale.bandwidth()-5)
         .attr('height', d => vis.height - vis.yScale(vis.yValue(d)))
         .attr('y', d => vis.yScale(vis.yValue(d)))
         .attr('fill','#FF0000'); 

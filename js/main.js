@@ -306,42 +306,37 @@ d3.csv('data/exoplanets_blank.csv')
 
     barChart1= new BarChartStar({
       'parentElement' : '#bar1',
-      'containerHeight': 400,
-      'containerWidth': 600,
+      'containerHeight': 300,
+      'containerWidth': 200,
     },graph1);
 
 
     barChart2= new BarChartPlanet({
       'parentElement' : '#bar2',
-      'containerHeight': 400,
-      'containerWidth': 600
+      'containerHeight': 300,
+      'containerWidth': 400
     },graph2);
 
 
     barChart4= new BarChartType({
       'parentElement' : '#bar4',
-      'containerHeight': 400,
-      'containerWidth': 600
+      'containerHeight': 300,
+      'containerWidth': 250
     },graph4);
     
     barChart3= new BarChartMethod({
       'parentElement' : '#bar3',
-      'containerHeight': 400,
-      'containerWidth': 600
+      'containerHeight': 300,
+      'containerWidth': 500
     },graph3);
 
     barChart5= new BarChartGroup({
       'parentElement' : '#bar5',
-      'containerHeight': 500,
-      'containerWidth': 700
+      'containerHeight': 300,
+      'containerWidth': 500
     },graph5);
     
-    lineChart = new LineChart({
-      'parentElement': '#line',
-      'containerHeight': 500,
-      'containerWidth': 700
-      }, discPerYear);
-
+    
     histogram=new Histogram({
       'parentElement': '#histogram',
       'containerHeight': 300,
@@ -349,7 +344,11 @@ d3.csv('data/exoplanets_blank.csv')
     },data);
     
     
- 
+    lineChart = new LineChart({
+      'parentElement': '#line',
+      'containerHeight': 200,
+      'containerWidth': 700
+      }, discPerYear); 
 
     scatterPlot= new ScatterPlot({
       'parentElement' : '#scatterplot',

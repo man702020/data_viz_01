@@ -1,3 +1,4 @@
+
 class LineChart{
 
   constructor(_config, _data) {
@@ -5,7 +6,7 @@ class LineChart{
       parentElement: _config.parentElement,
       containerWidth: _config.containerWidth || 500,
       containerHeight: _config.containerHeight || 140,
-      margin: { top: 20, bottom: 30, right: 50, left: 70 }
+      margin: { top: 40, bottom: 80, right: 20, left: 70 },
     }
 
     this.data = _data;

@@ -5,7 +5,7 @@ class BarChartStar{
       parentElement: _config.parentElement,
       containerWidth: _config.containerWidth-10 || 500,
       containerHeight: _config.containerHeight || 140,
-      margin: { top: 20, bottom: 40, right: 20, left: 50 },
+      margin: { top: 50, bottom: 50, right: 20, left: 70 },
       tooltipPadding: _config.tooltipPadding || 15
     }
 
@@ -50,7 +50,7 @@ class BarChartStar{
     //vis.svg.append('Number of Stars vs Frequency of Stars');
     vis.svg.append('text')
       .attr('class', 'chart-title')
-      .attr('x', vis.config.containerWidth / 2)
+      .attr('x', vis.config.containerWidth / 2+50)
       .attr('y', vis.config.margin.top / 2)
       .style('text-anchor', 'middle')
       .style('font-weight', 'bold')
@@ -74,7 +74,7 @@ class BarChartStar{
       vis.chart.append('text')
         .attr('class', 'axis-label')
         .attr('x', vis.width / 2)
-        .attr('y', vis.height + 30)
+        .attr('y', vis.height + 40)
         .style('text-anchor', 'middle')
         .text('Number of Stars');
 
@@ -82,7 +82,7 @@ class BarChartStar{
       vis.chart.append('text')
         .attr('class', 'axis-label')
         .attr('x', -vis.height / 2)
-        .attr('y', -40)
+        .attr('y', -50)
         .style('text-anchor', 'middle')
         .attr('transform', 'rotate(-90)')
         .text('Frequency of Stars');
@@ -132,7 +132,7 @@ class BarChartStar{
         .style('opacity', 1)
         .attr('class', 'bar')
         .attr('x', d => vis.xScale(vis.xValue(d)))
-        .attr('width', vis.xScale.bandwidth()-10)
+        .attr('width', vis.xScale.bandwidth()-2)
         .attr('height', d => vis.height - vis.yScale(vis.yValue(d)))
         .attr('y', d => vis.yScale(vis.yValue(d)))
         .attr('fill', '#00FF00');

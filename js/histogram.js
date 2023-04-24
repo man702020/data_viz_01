@@ -1,4 +1,31 @@
+class Histogram{
+  constructor(_config, _data) {
+    this.config = {
+      parentElement: _config.parentElement,
+      containerWidth: _config.containerWidth - 10 || 500,
+      containerHeight: _config.containerHeight || 140,
+      margin: { top: 40, bottom: 40, right: 20, left: 50 },
+      tooltipPadding: _config.tooltipPadding || 15
+    }
+  
+    this.data = _data;
 
+    // Call a class function
+    this.initVis();
+  }
+
+  initVis() {
+    
+  }
+  updateVis() {
+    let vis = this;
+  }
+  renderVis(){
+    let vis= this;
+  }
+}
+
+/*
 class Histogram{
 
   constructor(_config, _data) {
@@ -24,28 +51,6 @@ class Histogram{
     vis.width = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
     vis.height = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
 
-    // Initialize scales and axes
-    // Important: we flip array elements in the y output range to position the rectangles correctly
-
-    //vis.yScale = d3.scaleLinear()
-        //.range([vis.height, 0]) 
-
-    /*
-    vis.xScale = d3.scaleBand()
-        .range([0, vis.width])
-        .paddingInner(0.2);
-
-    vis.xAxis = d3.axisBottom(vis.xScale)
-        .tickSizeOuter(0);
-    */
-        
-
-    //vis.yAxis = d3.axisLeft(vis.yScale)
-        //.ticks(6)
-        //.tickSizeOuter(0)
-        //.ticks(7, ",.0f");
-        //.tickFormat(d3.formatPrefix('.0s', 1e6)); // Format y-axis ticks as millions
-
     // Define size of SVG drawing area
     vis.svg = d3.select(vis.config.parentElement)
         .attr('width', vis.config.containerWidth)
@@ -62,12 +67,6 @@ class Histogram{
     // SVG Group containing the actual chart; D3 margin convention
     vis.chart = vis.svg.append('g')
         .attr('transform', `translate(${vis.config.margin.left},${vis.config.margin.top})`);
-
-    // Append empty x-axis group and move it to the bottom of the chart
-
-    
-
-
           // Add x-axis label
       vis.chart.append('text')
         .attr('class', 'axis-label')
@@ -162,30 +161,6 @@ class Histogram{
         .attr('transform', `translate(0,${vis.height})`)
         .call(vis.xAxis);
 
-    /*
-     vis.bar
-        .on('mouseover', (event,d) => {
-            console.log("User over! ");
-
-        d3.select('#tooltip')
-            .style('display', 'block')
-            .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
-            .style('top', (event.pageY + vis.config.tooltipPadding) + 'px')
-            .html(` 
-              <div class="tooltip-title">Parameters</div>
-              <ul>
-                <li>Distance: ${d.sy_dist}</li>
-              </ul>
-            `);
-
-        })
-        .on('mouseleave', () => {
-          d3.select('#tooltip').style('display', 'none');
-        });
-    */
-
-    //vis.yAxisG.call(vis.yAxis);
-
     vis.renderVis();
   }
 
@@ -193,3 +168,4 @@ class Histogram{
 
   }
 }
+*/
