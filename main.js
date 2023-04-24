@@ -296,13 +296,13 @@ d3.csv('data/exoplanets_blank.csv')
       }
     });
 
-    console.log(graph1);
-    console.log(graph2); 
-    console.log(graph3); 
-    console.log(graph4); 
-    console.log(graph5); 
-    console.log(discPerYear); 
-    //console.log(graph6); 
+    //console.log(graph1);
+    //console.log(graph2); 
+    //console.log(graph3); 
+    //console.log(graph4); 
+    //console.log(graph5); 
+    //console.log(discPerYear); 
+    console.log(graph6); 
 
     barChart1= new BarChartStar({
       'parentElement' : '#bar1',
