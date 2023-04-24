@@ -1,0 +1,98 @@
+Project 1: Out of this world
+We are going to create an interactive visualization application to help a general audience explore the thousands exoplanets discovered by the Kepler Space TelescopeLinks to an external site. and other astronomical research facilities around the world in the past few decades. 
+
+About exoplanets
+What is an exoplanet and why are they interesting?  With the Kepler space mission and improvements in methods to detect planets outside of our solar system, astronomers have been able to document thousands of planets orbiting stars far away.  
+
+Data vis involves data from fields other than computer science.  It is good to learn as much as you can about a dataset when making a visualization.  Explore research topics related to that data.  Think about questions domain experts or non-experts may have about that data.  Typically, you would have access to these experts while doing your work.  For now, we will rely on the resources below to fill in some gaps.  These are optional but highly recommended.
+
+Some good sources of information:
+
+Exoplanet Data Explorer - http://exoplanets.org/table?datasets=explorerLinks to an external site.
+NASA Exoplanet Archive - http://exoplanetarchive.ipac.caltech.eduLinks to an external site.
+Open Exoplanet Catalogue - http://www.openexoplanetcatalogue.comLinks to an external site.
+Extrasolar Planets Encyclopedia - http://exoplanet.euLinks to an external site.
+Wikipedia Stellar Classification - http://en.wikipedia.org/wiki/Stellar_classificationLinks to an external site.
+Wikipedia - Our Solar System - http://en.wikipedia.org/wiki/Solar_SystemLinks to an external site.
+Wikipedia - Habitable Zones - http://en.wikipedia.org/wiki/Habitable_zoneLinks to an external site.
+Wikipedia - List of exoplanet Host Stars - http://en.wikipedia.org/wiki/List_of_exoplanetary_host_starsLinks to an external site.
+Wikipeia - List of Multiplanetary Systems - http://en.wikipedia.org/wiki/List_of_multiplanetary_systemsLinks to an external site.
+NY Times graphic on habitable zones - http://www.nytimes.com/interactive/2011/12/03/science/space/1202-planet.html?_r=0Links to an external site.
+Links to an external site.Atlantic article about exoplanets https://www.theatlantic.com/science/archive/2021/08/so-many-exoplanets/619717/Links to an external site.
+1 hour NOVA documentary about Kepler and exoplanets
+https://www.youtube.com/watch?v=2SYQIFwt83gLinks to an external site.
+
+"Tourism" Posters and 'scrolly-telling' explainers on some interesting exoplanets https://exoplanets.nasa.gov/alien-worlds/exoplanet-travel-bureau/Links to an external site.
+The Exoplanet Data
+Download the data we are working with here: exoplanets-1.xlsx Download exoplanets-1.xlsx 
+
+I have taken the initial step on your behalf, grabbing exoplanet data from this public exoplanet data repositoryLinks to an external site..  You can explore the data using their table view, and included references. 
+
+This is a tabular dataset.  The rows in the dataset are documented exoplanets and columns are data attributes for these exoplanets.  I did some light processing of the data, but you will likely need to do some processing of your own.  There are several spreadsheets in the excel file.  Some have blanks in the data labeled with 'BLANK'.  Feel free to use this or process the data as you see fit. 
+
+The data attributes (properties of the exoplanets) we are considering are:
+
+# COLUMN pl_name:        Planet Name
+# COLUMN hostname:       Host Name
+# COLUMN sys_name:       Usually Hostname except multi-star systems with planets orbiting different stars
+# COLUMN sy_snum:        Number of Stars
+# COLUMN sy_pnum:        Number of Planets
+# COLUMN discoverymethod: Discovery Method
+# COLUMN disc_year:      Discovery Year
+# COLUMN pl_orbper:      Orbital Period [days]
+# COLUMN pl_orbsmax:     Orbit Semi-Major Axis [au])
+# COLUMN pl_rade:        Planet Radius [Earth Radius]
+# COLUMN pl_bmasse:      Planet Mass or Mass*sin(i) [Earth Mass]
+# COLUMN pl_orbeccen:    Eccentricity
+# COLUMN st_spectype:    Spectral Type
+# COLUMN st_rad:         Stellar Radius [Solar Radius]
+# COLUMN st_mass:        Stellar Mass [Solar mass]
+# COLUMN sy_dist:        Distance [pc]
+Someone using your visualization will be able to understand questions such as: 
+
+How many exoplanets we have discovered?
+Has the exoplanet discovery rate increased?
+For the exoplanets we have discovered, what are their properties? 
+How big are they? 
+How do they orbit their stars? 
+How many planets may be in their system?  
+How many stars are in their system, and what are those stars like?
+How far away are they from us? 
+And more.
+Project setup:
+This is an individual project.  The material presented in the tutorials will give you a starting point.
+You will create an interactive web application using d3, javascript, html and css.  
+Your application will feature multiple views of the data, as well as potential interactive views and graphical interface elements.
+Your page should be easy to understand and look professional, with appropriate use of labels, fonts, UI elements, colors and layouts.  Usability will help your user explore the data.  If your UI is not easy to use, it will be difficult for your user to understand the data. 
+UI elements (check boxes, buttons, drop down menus, sliders) can be html UI elements.  W3 schools is an excellent resource here:  https://www.w3schools.com/html/default.aspLinks to an external site. 
+Visualizations should be presented in a coherent layout, and sized appropriately.  See the tutorial on layouts using css (to come).   
+Wherever possible, a viewer using a modern laptop should be able to see all visualizations at once, without scrolling. 
+There may be circumstances where you wish to display visualizations in multiple tabs. This must be explained and justified in your write-up.  
+All visualizations should have appropriate titles, legends and labels, and these should be legible. 
+Colors should be used to highlight the data, and should be chosen with care.  Some guidance:  
+Use color to highlight your data.  Minimize use of color elsewhere.  For instance- I would suggest not using a colorful background color, but white, grey or black.  
+You can integrate astronomy themed colors or backgrounds, but just make sure they don't distract from the data.  
+Do not use red (255,0,0), green (0,255,0), blue (0,0,255) (or solid cyan, yellow, magenta, etc). 
+If you are using color to encode your data, look to d3 color scales or color brewer gradients . 
+https://github.com/d3/d3-scale-chromaticLinks to an external site.
+https://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3Links to an external site.
+Otherwise, a color like steel blue is a safe choice for your visualizations. 
+https://www.htmlcsscolor.com/hex/4682B4Links to an external site.  
+More on colors in data visualization to follow in class
+You application will be tested in Chrome running under localhost. 
+You may also deploy it publicly online using github pages or another service, but this is not required. 
+Code should be uploaded on your github account.  After the deadline, please do not make updates to your code on github.  
+Documentation (descriptions, videos, screenshots) should be presented publicly on the page you created for homework in Week 1. 
+Project deadlines:
+The code will be due Monday Feb 27 at 11:59pm.  
+
+The documentation for your project will be due: Tuesday Feb 28 at 11:59pm.  
+
+Presentations for the project will be scheduled for the following week (Mar 1, Mar 3 )
+
+We can't push these deadlines- the other projects would get compressed. 
+
+We will have weekly check-in's on the project.  This is to motivate you to make progress every week, so you aren't finishing the project at the last minute.  A good pace would be to target 1 week working on the C-goals, 1 week working on the B-goals, and 2 weeks working on the A-goals.  
+
+Project grading breakdown: (edited to add)
+App: 75%, Documentation 20%, Presentation 5% 

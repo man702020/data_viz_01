@@ -1,0 +1,81 @@
+C-goals: If you meet all of these goals well (ie. high quality implementation) you can get a C 
+
+Show a title for the project, you name.  Indicate where the data came from and the libraries you used to visualize the data.  
+Load the exoplanet csv file (or a file derived from this original csv that you have produced by processing the code) 
+For a C, you can remove from consideration exoplanets with missing data relevant to the C portion of the project.  So, if there is a missing star type, you can remove it from consideration.  
+Allow a user to understand: 
+how many exoplanets are from systems with 1 star, 2 stars, 3 stars, and so on
+how many exoplanets are in systems with 1 planets, 2 planets, 3 planets and so on 
+how many exoplanets orbit stars of different types:
+The star types are: A, F, G, K and M 
+Include a link which opens a new tab, leading the user to information about star types
+how many exoplanets were discovered by different methods
+Include a link that explains the different exoplanet discovery methods 
+how many exoplanets are within a habitable zone vs outside the habitable zone.   
+The habitable zone depends on both the distance between the star and the planet, and the type of star. 
+The habitable zone begins and ends according to the list below (in astronomical units)
+A - inner =  8.5 AU, outer = 12.5 AU
+F - inner = 1.5 AU, outer = 2.2 AU
+G - inner = 0.95 AU, outer = 1.4 AU
+K - inner = 0.38 AU, outer = 0.56 AU
+M - inner = 0.08 AU, outer = 0.12 AU
+Bar charts are a good choice for this.  You may use other approaches- see note below.
+Allow users to see the distribution of exoplanets by their distance to us
+A histogram is a good choice for these visualizations.  You may use other approaches- see note below.
+Enable the user to see exoplanet discoveries over time (by year). 
+They should be able to identify the trends in the discoveries. 
+A line chart is a good choice for this.  You may use other approaches- see note below.
+Show the relationships between exoplanet radius and mass 
+Also show the planets from our solar system, highlighted though a distinct color and label them.  
+Consider whether to use a linear or logarithmic scale
+A scatterplot is a good choice for this.  You may use other approaches- see note below.
+All of the above visualizations can be static for a C.  They should be a good fit for the data you are representing and the task you are enabling. 
+I provided suggestions for the chart types to use here (bar charts, line charts, scatterplots).  You may have another idea that you want to try for a particular task.  Run it by me and then include sketches of the idea in your documentation before implementation.
+B-goal: complete the C-goals, plus add:
+
+To your application, add a table showing the exoplanet data.
+They user should be able to scroll through this table and see some of the information about the planets
+You do not need to show all of the information- decide what you think your user would be interested in seeing
+Use tooltips to show additional information to users within all the visualizations you have created for the C-goals.  
+Bar chart selections, updates:
+For the bar chart visualizations ( habitable zone planets, # of stars in the system, # planets in the system, star types and discovery methods)
+The user should be able to select a bar
+All the visualizations on screen should update based on this selection, showing the selected data.  
+The table should update to show the selected data
+Transitions should be animated
+The user should have some way to undo a selection, returning to the original data
+Decide whether to have selections combine with each other (can someone first select habitable zone planets, and then select one star type, or can they only make one selection at a time?)
+Consider how the user will discover this action- do you want to include some visible instructions for what to do?
+I provided suggestions for the interactions to use here.  You may have another idea that you want to try to achieve the same data exploration patterns.  Run it by me and then include sketches of the idea in your documentation.  
+A-goals: B-goals and C-goals plus add: 
+
+For an A, you need an approach to handle missing data.  All data should be loaded.  In your documentation, describe how you handed data points with missing fields. 
+For the A goals, include sketches of your exoplanet browser design and the brushing and linking interactions.  
+Exoplanet system browser:  I want to be able to see more information about these planetary systems.  Create an exoplanet system browser.  I should be able to select a specific exoplanet from the table or from the scatterplot.  Then, I want to be able to learn more about that exoplanet and the system it comes from.  Include sketches of your idea, to plan your intended view. For the selected system, user should be able to see:
+The distances of the planets to their star
+The orbits of the planets around their star (note, these are ellipses)
+The sizes of the planets
+The size of their star
+NOTE- you will likely need distinct scales for each of the above, to ensure your elements are visible.  Make these scale clear within your visualization  
+The star type (such as using color)
+What kind of planet is it: 
+Minor planets, moons and comets
+Less than 0.00001 Earth masses = asteroidan
+0.00001 to 0.1 Earth masses = mercurian
+Terrestrial planets (rocky composition)
+0.1-0.5 Earth masses = subterran
+0.5-2 Earth masses = terran (Earths)
+2-10 Earth masses = superterran (super-Earths)
+Gas giant planets
+10-50 Earth masses = Neptunian (Neptunes)
+50-5000 Earth masses = Jovian (Jupiters)
+Multi-star systems: 
+In the vast majority of cases, all the exoplanets orbit the same star. 
+Show the planets in their orbit around their star
+Show the other stars in the system off to the side, but sized according to your scale. We don't have access to the orbits of the stars around each other.  
+Rare: If you have a system with multiple stars and planets orbit multiple stars, you can just show the planets that orbit the main star, the other stars off to the side.  
+Deeper exploration through brushing and linking interactions.  In the scatterplot, year and 'distance to us' histogram
+The user should be able to initiate a brush within the scatterplot, year visualization and distance to us histogram
+They should be able to move and re-size the brush
+Their actions should update the other visualizations on the display
+Decide whether to only allow for one selection at a time, or whether to let the selections combine together.  For instance, can the user select discoveries between 2010-2020, and then select habitable zone planets, and then select planets with mass and radius similar to earth.  
