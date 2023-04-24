@@ -1,12 +1,27 @@
 console.log("Hello world");
 let data, lineChart, barChart1, barChart2, barChart3, barChart4, barChart5, scatterPlot, histogram,graph1;
+let max_value, min_value;
 
-d3.csv('data/exoplanets_blank.csv')
+d3.csv('data/Exoplanets.csv')
   .then(_data => {
   	console.log('Data loading complete. Work with dataset.');
-  	data = _data;
-    console.log(data);
-
+  	//data = _data;
+  
+    data = _data.filter(d => {
+      return (d.disc_year !== null && 
+              d.sy_pnum !== null && 
+              d.sy_snum !== null && 
+              d.st_rad !== null && 
+              d.st_mass !== null && 
+              d.sy_dis !== null && 
+              d.pl_orbsmax !== null && 
+              d.discoverymethod !== null && 
+              d.st_spectype !== null && 
+              d.sys_name !== null)
+    });
+    
+    console.log(data); 
+    
     //process the data - this is a forEach function. 
     data.forEach(d => { 
       	d.disc_year = +d.disc_year; // convert string 'disc_year' to discovery year
@@ -91,8 +106,25 @@ d3.csv('data/exoplanets_blank.csv')
         {'xValue': "K", 'yValue':0, 'zValue':0 }, 
         {'xValue': "M", 'yValue':0, 'zValue':0 }, 
     ];
-
-    let graph6= [{frequency:0}];
+    
+    let graph6=[
+      {xValue : 270, yValue : 0},
+      {xValue : 810, yValue : 0},
+      {xValue : 1350, yValue : 0},
+      {xValue : 1890, yValue : 0},
+      {xValue : 2430, yValue : 0},
+      {xValue : 2970, yValue : 0},
+      {xValue : 3510, yValue : 0},
+      {xValue : 4050, yValue : 0},
+      {xValue : 4590, yValue : 0},
+      {xValue : 5130, yValue : 0},
+      {xValue : 5670, yValue : 0},
+      {xValue : 6210, yValue : 0},
+      {xValue : 6750, yValue : 0},
+      {xValue : 7290, yValue : 0},
+      {xValue : 7830, yValue : 0},
+      {xValue : 8370, yValue: 0}
+    ];
 
     data.forEach(d=>{
       if(d.sy_snum==1)
@@ -267,11 +299,82 @@ d3.csv('data/exoplanets_blank.csv')
           graph5[4].zValue=graph5[4].zValue + 1;
         }
       }
-      graph6[0].frequency=graph6[0].frequency+d.sy_dist;
-
+      //max_value= 8500
+      //min_value=1.3019
+      //bin_number=15
+      //bin_width=531.16
+      if(d.sy_dist>1 && d.sy_dist<=540)
+      {
+        graph6[0].yValue=graph6[0].yValue+1;
+      }
+      else if(d.sy_dist>540 && d.sy_dist<=1080)
+      {
+        graph6[1].yValue=graph6[1].yValue+1;
+      }
+      else if(d.sy_dist>1080 && d.sy_dist<=1620)
+      {
+        graph6[2].yValue=graph6[3].yValue+1;
+      }
+      else if(d.sy_dist>1620 && d.sy_dist<=2160)
+      {
+        graph6[3].yValue=graph6[3].yValue+1;
+      }
+      else if(d.sy_dist>2160 && d.sy_dist<=2700)
+      {
+        graph6[4].yValue=graph6[4].yValue+1;
+      }
+      else if(d.sy_dist>2700 && d.sy_dist<=3240)
+      {
+        graph6[5].yValue=graph6[5].yValue+1;
+      }
+      else if(d.sy_dist>3240 && d.sy_dist<=3780)
+      {
+        graph6[6].yValue=graph6[6].yValue+1;
+      }
+      else if(d.sy_dist>3780 && d.sy_dist<=4320)
+      {
+        graph6[7].yValue=graph6[7].yValue+1;
+      }
+      else if(d.sy_dist>4320 && d.sy_dist<=4860)
+      {
+        graph6[8].yValue=graph6[8].yValue+1;
+      }
+      else if(d.sy_dist>4860 && d.sy_dist<=5400)
+      {
+        graph6[9].yValue=graph6[9].yValue+1;
+      }
+      else if(d.sy_dist>5400 && d.sy_dist<=5940)
+      {
+        graph6[10].yValue=graph6[10].yValue+1;
+      }
+      else if(d.sy_dist>5940 && d.sy_dist<=6480)
+      {
+        graph6[11].yValue=graph6[11].yValue+1;
+      }
+      else if(d.sy_dist>6480 && d.sy_dist<=7020)
+      {
+        graph6[12].yValue=graph6[12].yValue+1;
+      }
+      else if(d.sy_dist>7020 && d.sy_dist<=7560)
+      {
+        graph6[13].yValue=graph6[13].yValue+1;
+      }
+      else if(d.sy_dist>7560 && d.sy_dist<=8100)
+      {
+        graph6[14].yValue=graph6[14].yValue+1;
+      }
+      else if(d.sy_dist>8100)
+      {
+        graph6[15].yValue=graph6[15].yValue+1;
+      }
     });
-    
+
+
+    console.log(graph6);
+
     let table = $('#my-table tbody');
+
+    
     data.forEach((d) => {
       let row = $('<tr>');
       row.append($('<td>').text(d.sys_name));
@@ -296,18 +399,17 @@ d3.csv('data/exoplanets_blank.csv')
       }
     });
 
-    console.log(graph1);
-    console.log(graph2); 
-    console.log(graph3); 
-    console.log(graph4); 
-    console.log(graph5); 
-    console.log(discPerYear); 
-    //console.log(graph6); 
+    //console.log(graph1);
+    //console.log(graph2); 
+    //console.log(graph3); 
+    //console.log(graph4); 
+    //console.log(graph5); 
+    //console.log(discPerYear);  
 
     barChart1= new BarChartStar({
       'parentElement' : '#bar1',
       'containerHeight': 300,
-      'containerWidth': 200,
+      'containerWidth': 400,
     },graph1);
 
 
@@ -341,7 +443,7 @@ d3.csv('data/exoplanets_blank.csv')
       'parentElement': '#histogram',
       'containerHeight': 300,
       'containerWidth': 800
-    },data);
+    },graph6);
     
     
     lineChart = new LineChart({
@@ -352,8 +454,8 @@ d3.csv('data/exoplanets_blank.csv')
 
     scatterPlot= new ScatterPlot({
       'parentElement' : '#scatterplot',
-      'containerHeight': 200,
-      'containerWidth': 700
+      'containerHeight': 400,
+      'containerWidth': 1000
     }, data);
 
 })

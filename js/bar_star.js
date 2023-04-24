@@ -50,7 +50,7 @@ class BarChartStar{
     //vis.svg.append('Number of Stars vs Frequency of Stars');
     vis.svg.append('text')
       .attr('class', 'chart-title')
-      .attr('x', vis.config.containerWidth / 2+50)
+      .attr('x', vis.config.containerWidth / 2)
       .attr('y', vis.config.margin.top / 2)
       .style('text-anchor', 'middle')
       .style('font-weight', 'bold')
@@ -132,7 +132,7 @@ class BarChartStar{
         .style('opacity', 1)
         .attr('class', 'bar')
         .attr('x', d => vis.xScale(vis.xValue(d)))
-        .attr('width', vis.xScale.bandwidth()-2)
+        .attr('width', vis.xScale.bandwidth()-10)
         .attr('height', d => vis.height - vis.yScale(vis.yValue(d)))
         .attr('y', d => vis.yScale(vis.yValue(d)))
         .attr('fill', '#00FF00');

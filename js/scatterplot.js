@@ -6,7 +6,7 @@ class ScatterPlot {
       parentElement: _config.parentElement,
       containerWidth: _config.containerWidth || 600,
       containerHeight: _config.containerHeight || 400,
-      margin: _config.margin || {top: 55, right: 30, bottom: 30, left: 50},
+      margin: { top: 70, bottom: 50, right: 20, left: 70 },
       tooltipPadding: _config.tooltipPadding || 15
     }
     this.data = _data;
@@ -16,13 +16,14 @@ class ScatterPlot {
 initVis() {
     let vis = this; 
 
-    vis.width = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
+    vis.width = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right-100;
     vis.height = vis.config.containerHeight - vis.config.margin.top - vis.config.margin.bottom;
 
     // Initialize scales
     vis.colorScale = d3.scaleOrdinal()
-        .range(['#FF0000', '#00FF00', '#0000FF','#FFA500']) // light green to dark green
+        .range(['#8b0000', ' #00008b', '#a52a2a','#d62728']) // light green to dark green
         .domain(['Number of Star: 1','Number of Star: 2','Number of Star: 3', 'Number of Star: 4']);
+        
 
     vis.xScale = d3.scaleLinear()
         .range([0, vis.width]);
@@ -47,7 +48,7 @@ initVis() {
     vis.svg.append('text')
         .attr('class', 'chart-title')
       .attr('x', vis.config.containerWidth / 2)
-      .attr('y', vis.config.margin.top / 2)
+      .attr('y', vis.config.margin.top / 2-15)
       .style('text-anchor', 'middle')
       .style('font-weight', 'bold')
       .text('Variation of weight and volume of the exoplanet System');
@@ -71,7 +72,7 @@ initVis() {
       vis.chart.append('text')
         .attr('class', 'axis-label')
         .attr('x', vis.width / 2)
-        .attr('y', vis.height + 20)
+        .attr('y', vis.height + 40)
         .style('text-anchor', 'middle')
         .text('Mass');
 
@@ -101,6 +102,8 @@ initVis() {
         .attr('y2', vis.height);
 
 
+    
+
     vis.updateVis();
 }
 
@@ -119,18 +122,45 @@ updateVis() {
         .enter()
     .append('circle')
         .attr('class', 'point')
-        .attr('r', 4)
+        .attr('r', d =>  d.sys_name === "30 Ari B" ? 25: d.st_rad/3)
         .attr('cy', d => vis.yScale(vis.yValue(d)))
         .attr('cx', d => vis.xScale(vis.xValue(d)))
         //.attr('fill', (d) => vis.colorScale(d.sy_snum))
         .attr('fill', d => vis.colorScale(vis.colorValue(d)))
-        .attr('stroke-width', 1)
-        .attr('stroke', 'black');
+        .attr('stroke-width', d => d.sys_name === "30 Ari B" ? 2 : 1)
+        .attr('stroke', 'black')
+        .attr('opacity', d => d.sys_name === "30 Ari B" ? 0.8 : 0.3);
+    
+   
+    var legendCircles = vis.chart.selectAll('.legend-circle')
+        .data(['Number of Star: 1', 'Number of Star: 2', 'Number of Star: 3', 'Number of Star: 4'])
+        .enter()
+        .append('circle')
+        .attr('class', 'legend-circle')
+        .attr('r', 6) // Set the radius of the circles to 6 pixels
+        .attr('cx', vis.width+40) // Set the x-coordinate of the circles
+        .attr('cy', function(d, i) { return vis.height*2/3 + i * 20; }) // Set the y-coordinate of the circles
+        .style('fill', function(d) { return vis.colorScale(d); }); // Set the fill color of the circles using the color scale
+    
+    var legendLabels = vis.chart.selectAll('.legend-label')
+        .data(['Stars: 1', 'Stars: 2', 'Stars: 3', 'Stars: 4'])
+        .enter()
+        .append('text')
+        .attr('class', 'legend-label')
+        .attr('x', vis.width + 50) // Set the x-coordinate of the labels
+        .attr('y', function(d, i) { return vis.height*2/3 + i * 20; }) // Set the y-coordinate of the labels
+        .attr('dy', '0.3em') // Adjust the vertical alignment of the labels
+        .text(function(d) { return d; }); // Set the text of the labels to the data item
+
+        
+     // Style the labels
+    legendLabels
+       .style('font-size', '12px')
+        .style('fill', function(d) { return vis.colorScale(d); })
+        .style('text-anchor', 'start'); 
 
     vis.circles
           .on('mouseover', (event,d) => {
-            console.log("User on impact");
-
             d3.select('#tooltip')
             .style('display', 'block')
             .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
@@ -138,11 +168,14 @@ updateVis() {
             .html(` 
               <div class="tooltip-title">System Name: ${d.sys_name}</div>
               <ul>
-                <li>Discovery Method: ${d.discoverymethod}</li>
-                <li>Disovery Year: ${d.disc_year}</li>
+                <li>System Mass: ${d.st_mass}</li>
+                <li>System Radius: ${d.st_rad}</li>
               </ul>
             `);
           })
+        .on('click',(event,d) => { 
+
+        })
         .on('mouseleave', () => {
           d3.select('#tooltip').style('display', 'none');
         });

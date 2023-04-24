@@ -30,7 +30,7 @@
     </nav>
     <main class="container-fluid flex-grow-1">
         <div class="row h-10">
-            <section class="col-2">
+            <section class="col-3">
                 <div class="row" id="left-chart-container">
                   <svg id="bar1"></svg>
                   
@@ -43,18 +43,20 @@
             </div>
             </section>
             <section class="col-3">
+              <div class="row" id="middle-right-chart-container">
+                <svg id="bar3"></svg>
+                </div>
+              </section>
+            <section class="col-2">
                 <div class="row" id="middle-right-chart-container">
                   
                   <svg id="bar4"></svg>
 
                 </div>
             </section>
-            <section class="col-3">
-              <div class="row" id="middle-right-chart-container">
-                <svg id="bar3"></svg>
-                </div>
-              </section>
+
         </div>
+        <br>
         <div class="row h-30">
           <section class="col-5">
               <div class="row_two" id="left-chart-container-two">
@@ -63,14 +65,22 @@
             </section>
             <section class="col-3">
               <div class="row_two" id="middle-chart-container-two">
+                <svg id="histogram"></svg>
                 
-                <svg id="line"></svg>
               </div>
             </section>
           </div>
+          <br>
+          <div class="row h-30">
+            <section class="col-5">
+            <div class="row_three" id="left-chart-container-three">
+              <svg id="scatterplot"></svg>
+            </div>
+          </section>
+          </div>
+          <svg id="line"></svg>
           
-          <svg id="histogram"></svg>
-        <svg id="scatterplot"></svg>
+        
 
         <script src="js/d3.v6.min.js"></script>
         <script src="js/main.js"></script>
@@ -85,9 +95,12 @@
         <script src="js/histogram.js"></script>
         <script src="js/scatterplot.js"></script>
         <div id="tooltip"></div>
+        <br>
+        <br>
         <center>
-          <h3>Distribution of Data</h3>
+          <h4>Tabular Representation for data of Exoplanet System</h4>
         </center>
+        <br>
           <div class="table-container">
             <table id="my-table">
               <thead>
@@ -108,11 +121,12 @@
             </table>
           </div>
           <center>
-            <h4>
+            <br>
+            <h5>
           <a href="https://exoplanetarchive.ipac.caltech.edu/">Visit Data Source</a>
-        </h4></center>
+        </h5></center>
         <div id="watermark">
-        <h4>Source: NASA</h4>
+        <h5>Source: NASA</h5>
         </div>
     </main>
   </body>
