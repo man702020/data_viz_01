@@ -25,9 +25,15 @@ d3.csv('data/Exoplanets.csv')
     
     console.log(data); 
 
-    orbitPlot= new orbitPlot({
+    let orbitPlot= new orbitPlot({
       'parentElement' : '#orbitplot',
-      'containerHeight': 500,
-      'containerWidth': 1500
+      'containerHeight': 750,
+      'containerWidth': 1000
+    }, data);
+
+    let informationPlot= new informationPlot({
+      'parentElement' : '#informationplot',
+      'containerHeight': 750,
+      'containerWidth': 1000
     }, data);
 })
