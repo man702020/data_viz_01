@@ -115,7 +115,7 @@ updateVis() {
 
     vis.colorValue = d => d.sy_snum;
 
-    console.log(vis.colorValue);
+    //console.log(vis.colorValue);
     vis.xScale.domain([0, d3.max(vis.data, vis.xValue)]);
     vis.yScale.domain([0, d3.max(vis.data, vis.yValue)]);
 
