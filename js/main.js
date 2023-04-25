@@ -458,6 +458,7 @@ d3.csv('data/Exoplanets.csv')
       'containerWidth': 800
     }, data);
 
+
 })
 .catch(error => {
     console.error('Error loading the data'+error);

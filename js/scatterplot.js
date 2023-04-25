@@ -21,7 +21,7 @@ initVis() {
 
     // Initialize scales
     vis.colorScale = d3.scaleOrdinal()
-        .range(['#FFA500', '#FF0000', '#0000FF','#00FF00'])
+        .range(['#FF00FF', '#FF0000', '#0000FF','#00FF00'])
         .domain(['Number of Star: 1','Number of Star: 2','Number of Star: 3', 'Number of Star: 4']);
         
 
@@ -131,7 +131,7 @@ updateVis() {
         //.attr('fill', d => vis.colorScale(vis.colorValue(d)))
         .attr('stroke-width', d => d.sys_name === "30 Ari B" ? 2 : 1)
         .attr('stroke', 'black')
-        .attr('opacity', d => d.sys_name === "30 Ari B" ? 0.8 : 0.7);
+        .attr('opacity', d => d.sys_name === "30 Ari B" ? 0.9 : 0.6);
     
    
     var legendCircles = vis.chart.selectAll('.legend-circle')
