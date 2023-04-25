@@ -6,7 +6,7 @@ class orbitPlot {
       parentElement: _config.parentElement,
       containerWidth: _config.containerWidth || 600,
       containerHeight: _config.containerHeight || 400,
-      margin: { top: 70, bottom: 50, right: 20, left: 70 },
+      margin: { top: 90, bottom: 50, right: 20, left: 70 },
       tooltipPadding: _config.tooltipPadding || 15
     }
     this.data = _data;
@@ -29,7 +29,8 @@ class orbitPlot {
       .attr('y', vis.config.margin.top / 2-15)
       .style('text-anchor', 'middle')
       .style('font-weight', 'bold')
-      .text('Exoplanet System');
+      .text('Exoplanet System')
+      .style('font-size', 32);
 
     vis.chart = vis.svg.append('g')
       .attr('transform', `translate(${vis.config.margin.left},${vis.config.margin.top})`);
@@ -64,7 +65,7 @@ class orbitPlot {
         .enter()
         .append('circle')
         .attr('class', 'sun_point')
-        .attr('r', d=> vis.data[0].st_rad)
+        .attr('r', d=> Math.log(vis.data[0].st_rad*695700)*5)
         .attr('cy', vis.height/2)
         .attr('cx', d=>vis.width/2)
         .attr('fill', 'orange')
@@ -79,7 +80,7 @@ class orbitPlot {
         .data(vis.data)
         .attr("x1", vis.width/2) // x-coordinate of starting point
         .attr("y1", vis.height/2) // y-coordinate of starting point
-        .attr("x2", d=>vis.width/2+d.sy_dist/11.33*2) // x-coordinate of ending point
+        .attr("x2", d=>vis.width/2+Math.log(d.sy_dist*3.86*10^13)*5)///11.33*2) // x-coordinate of ending point
         .attr("y2", vis.height/2) // y-coordinate of ending point
         .attr("stroke", "black") // color of the line
         .attr("stroke-width", 2)
@@ -94,7 +95,7 @@ class orbitPlot {
         .attr('cx', d=>vis.width/2)
         .attr("stroke", "black") // color of the line
         .attr("stroke-width", 2)
-        .attr('r', d=>d.sy_dist/11.33*2)
+        .attr('r', d=>Math.log(d.sy_dist*3.86*10^13)*5)//d.sy_dist/11.33*2)
         .attr("stroke-dasharray", "5,5")
         .attr("fill","none");
 
@@ -103,9 +104,9 @@ class orbitPlot {
         .enter()
         .append('circle')
         .attr('class', 'point')
-        .attr('r', d=>d.pl_rade)
+        .attr('r', d=>Math.log(d.pl_rade*6378.14)*5)
         .attr('cy', vis.height/2)
-        .attr('cx', d=>vis.width/2+d.sy_dist/11.33*2) // to mange 8500 max d.sy_dist into 750 space 
+        .attr('cx', d=>vis.width/2+Math.log(d.sy_dist*3.86*10^13)*5)//d.sy_dist/11.33*2) // to mange 8500 max d.sy_dist into 750 space 
         .attr('fill', 'blue')
         .attr('stroke-width', 2)
         .attr('stroke', 'black')
@@ -118,7 +119,7 @@ class orbitPlot {
             .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
             .style('top', (event.pageY + vis.config.tooltipPadding) + 'px')
             .html(` 
-              <div class="tooltip-title">Planet Radius: ${d.pl_rade}</div>
+              <div class="tooltip-title">Planet Radius: ${d.pl_rade}  [Earth Radius]</div>
             `)
           });
 
@@ -129,10 +130,10 @@ class orbitPlot {
             .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
             .style('top', (event.pageY + vis.config.tooltipPadding) + 'px')
             .html(` 
-              <div class="tooltip-title">Star Radius: ${vis.data[0].st_rad}</div>
+              <div class="tooltip-title">Star Radius: ${vis.data[0].st_rad} [Solar Radius]</div>
             `)
           });
-        });
+  
 
     vis.line
           .on('mouseover', (event,d) => {
@@ -141,7 +142,7 @@ class orbitPlot {
             .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
             .style('top', (event.pageY + vis.config.tooltipPadding) + 'px')
             .html(` 
-              <div class="tooltip-title">Distance from Star: ${d.sy_dist}</div>
+              <div class="tooltip-title">Distance from Star: ${d.sy_dist} [pc]</div>
             `)
           });
     
@@ -152,7 +153,7 @@ class orbitPlot {
             .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
             .style('top', (event.pageY + vis.config.tooltipPadding) + 'px')
             .html(` 
-              <div class="tooltip-title">Orbital Semi-major axis: ${d.pl_orbsmax} Eccentricity: ${d.pl_orbeccen}  </div>
+              <div class="tooltip-title">Orbital Semi-major axis: ${d.pl_orbsmax}[au] Eccentricity: ${d.pl_orbeccen}  </div>
             `)
           });
     /*

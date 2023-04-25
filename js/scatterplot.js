@@ -21,7 +21,7 @@ initVis() {
 
     // Initialize scales
     vis.colorScale = d3.scaleOrdinal()
-        .range(['#FFC0CB', ' #FF0000', ' #0000FF',' #00FF00']) // light green to dark green
+        .range(['#FFA500', '#FF0000', '#0000FF','#00FF00'])
         .domain(['Number of Star: 1','Number of Star: 2','Number of Star: 3', 'Number of Star: 4']);
         
 
@@ -114,22 +114,24 @@ updateVis() {
     vis.yValue = d => d.st_rad;
 
     vis.colorValue = d => d.sy_snum;
-        vis.xScale.domain([0, d3.max(vis.data, vis.xValue)]);
+
+    console.log(vis.colorValue);
+    vis.xScale.domain([0, d3.max(vis.data, vis.xValue)]);
     vis.yScale.domain([0, d3.max(vis.data, vis.yValue)]);
 
     vis.circles=vis.chart.selectAll('.point')
         .data(vis.data)
         .enter()
-    .append('circle')
+      .append('circle')
         .attr('class', 'point')
         .attr('r', d =>  d.sys_name === "30 Ari B" ? 25: d.st_rad/3)
         .attr('cy', d => vis.yScale(vis.yValue(d)))
         .attr('cx', d => vis.xScale(vis.xValue(d)))
-        //.attr('fill', (d) => vis.colorScale(d.sy_snum))
-        .attr('fill', d => vis.colorScale(vis.colorValue(d)))
+        .attr('fill', (d) => vis.colorScale(d.sy_snum))
+        //.attr('fill', d => vis.colorScale(vis.colorValue(d)))
         .attr('stroke-width', d => d.sys_name === "30 Ari B" ? 2 : 1)
         .attr('stroke', 'black')
-        .attr('opacity', d => d.sys_name === "30 Ari B" ? 0.8 : 0.3);
+        .attr('opacity', d => d.sys_name === "30 Ari B" ? 0.8 : 0.7);
     
    
     var legendCircles = vis.chart.selectAll('.legend-circle')
@@ -143,7 +145,7 @@ updateVis() {
         .style('fill', function(d) { return vis.colorScale(d); }); // Set the fill color of the circles using the color scale
     
     var legendLabels = vis.chart.selectAll('.legend-label')
-        .data(['Stars: 1', 'Stars: 2', 'Stars: 3', 'Stars: 4'])
+        .data(['Stars: 4', 'Stars: 3', 'Stars: 2', 'Stars: 1'])
         .enter()
         .append('text')
         .attr('class', 'legend-label')
