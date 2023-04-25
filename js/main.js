@@ -445,8 +445,12 @@ d3.csv('data/Exoplanets.csv')
       'containerWidth': 800
     },graph6);
     
-    
- 
+    console.log(discPerYear);
+    lineChart = new LineChart({
+      'parentElement': '#line',
+      'containerHeight': 400,
+      'containerWidth': 700
+      }, discPerYear); 
 
     scatterPlot= new ScatterPlot({
       'parentElement' : '#scatterplot',
@@ -454,11 +458,6 @@ d3.csv('data/Exoplanets.csv')
       'containerWidth': 800
     }, data);
 
-    lineChart = new LineChart({
-      'parentElement': '#line',
-      'containerHeight': 400,
-      'containerWidth': 700
-      }, discPerYear);
 
 })
 .catch(error => {
