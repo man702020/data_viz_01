@@ -13,7 +13,7 @@ d3.csv('data/Exoplanets.csv')
               d.sy_snum !== null && 
               d.st_rad !== null && 
               d.st_mass !== null && 
-              d.sy_dis !== null && 
+              d.sy_dist !== null && 
               d.pl_orbsmax !== null && 
               d.discoverymethod !== null && 
               d.st_spectype !== null && 

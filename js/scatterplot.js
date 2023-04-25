@@ -21,7 +21,7 @@ initVis() {
 
     // Initialize scales
     vis.colorScale = d3.scaleOrdinal()
-        .range(['#8b0000', ' #00008b', '#a52a2a','#d62728']) // light green to dark green
+        .range(['#FFC0CB', ' #FF0000', ' #0000FF',' #00FF00']) // light green to dark green
         .domain(['Number of Star: 1','Number of Star: 2','Number of Star: 3', 'Number of Star: 4']);
         
 
@@ -74,7 +74,7 @@ initVis() {
         .attr('x', vis.width / 2)
         .attr('y', vis.height + 40)
         .style('text-anchor', 'middle')
-        .text('Mass');
+        .text('Stellar Mass (Solar Mass)');
 
       // Add y-axis label
       vis.chart.append('text')
@@ -83,7 +83,7 @@ initVis() {
         .attr('y', -40)
         .style('text-anchor', 'middle')
         .attr('transform', 'rotate(-90)')
-        .text('Radius');
+        .text('Stellar Radius (Solar Radius)');
       
       // Add x-axis line
       vis.chart.append('line')
@@ -174,7 +174,8 @@ updateVis() {
             `);
           })
         .on('click',(event,d) => { 
-
+          localStorage.setItem('clickedData', JSON.stringify(d));
+          window.open('browser.html', '_blank');
         })
         .on('mouseleave', () => {
           d3.select('#tooltip').style('display', 'none');
