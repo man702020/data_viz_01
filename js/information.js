@@ -132,7 +132,6 @@ class orbitPlot {
               <div class="tooltip-title">Star Radius: ${vis.data[0].st_rad}</div>
             `)
           });
-        });
 
     vis.line
           .on('mouseover', (event,d) => {
