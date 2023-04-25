@@ -370,7 +370,7 @@ d3.csv('data/Exoplanets.csv')
     });
 
 
-    console.log(graph6);
+    //console.log(graph6);
 
     let table = $('#my-table tbody');
 

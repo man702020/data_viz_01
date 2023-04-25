@@ -23,15 +23,15 @@ d3.csv('data/Exoplanets.csv')
               && d.pl_rade!==null)
     });
     
-    console.log(data); 
+    //console.log(data); 
 
-    let orbitPlot= new orbitPlot({
+    let orbitplot= new orbitPlot({
       'parentElement' : '#orbitplot',
       'containerHeight': 750,
       'containerWidth': 1000
     }, data);
 
-    let informationPlot= new informationPlot({
+    let informationplot= new informationPlot({
       'parentElement' : '#informationplot',
       'containerHeight': 750,
       'containerWidth': 1000

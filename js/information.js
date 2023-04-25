@@ -1,4 +1,4 @@
-class orbitPlot {
+class informationPlot {
 
   constructor(_config, _data) {
 
@@ -29,7 +29,8 @@ class orbitPlot {
       .attr('y', vis.config.margin.top / 2-15)
       .style('text-anchor', 'middle')
       .style('font-weight', 'bold')
-      .text('Exoplanet System');
+      .style('font-size', 16)
+      .text('Information Regarding exoplanet system');
 
     vis.chart = vis.svg.append('g')
       .attr('transform', `translate(${vis.config.margin.left},${vis.config.margin.top})`);
@@ -39,138 +40,142 @@ class orbitPlot {
 
   updateVis(){
     let vis = this;
+    console.log(vis.data);
 
-
+    vis.chart.selectAll("text")
+      .data(vis.data)
+      .enter()
+      .append("text")
+      .attr("x", vis.width/2-150)
+      .attr("y", function(d, i) { return i * 200 + 25; })
+      .text(function(d) { 
+        return "Planet Name: " + d.pl_name;
+      })
+      .attr("font-size", "12px")
+      .attr("fill", "black");
     
-    let test_data= [];
-    if(vis.data.sy_snum==1)
-    {
-      test_data=['Stars: 1'];
-    }
-    else if(vis.data.sy_snum==2)
-    {
-      test_data=['Stars: 1','Stars: 2']
-    }
-    else if(vis.data.sy_snum==2)
-    {
-      test_data=['Stars: 1','Stars: 2', 'Stars: 3']
-    }
-    else{
-      test_data=['Stars: 1','Stars: 2', 'Stars: 3', 'Stars: 4']
-    }
-
-    vis.sun_circles=vis.chart.selectAll('.sun_point')
-        .data(test_data)
-        .enter()
-        .append('circle')
-        .attr('class', 'sun_point')
-        .attr('r', d=> vis.data[0].st_rad)
-        .attr('cy', vis.height/2)
-        .attr('cx', d=>vis.width/2)
-        .attr('fill', 'orange')
-        .attr('stroke-width', 2)
-        .attr('stroke', 'black')
-        .attr('opacity',0.5);
-     
-     
-
-
-    vis.line = vis.chart.append("line")
-        .data(vis.data)
-        .attr("x1", vis.width/2) // x-coordinate of starting point
-        .attr("y1", vis.height/2) // y-coordinate of starting point
-        .attr("x2", d=>vis.width/2+d.sy_dist/11.33*2) // x-coordinate of ending point
-        .attr("y2", vis.height/2) // y-coordinate of ending point
-        .attr("stroke", "black") // color of the line
-        .attr("stroke-width", 2)
-        .attr("stroke-dasharray", "5,5"); // width of the line
+    vis.chart.selectAll("text1")
+      .data(vis.data)
+      .enter()
+      .append("text")
+      .attr("x", vis.width/2-150)
+      .attr("y", function(d, i) { return i * 200 + 50; })
+      .text(function(d) { 
+        return "Orbit Semi-Major Axis: " + d.pl_orbsmax+"[au]";
+      })
+      .attr("font-size", "12px")
+      .attr("fill", "black");
     
-    vis.test_circle=vis.chart.selectAll('.test_point')
-        .data(vis.data)
-        .enter()
-        .append('circle')
-        .attr('class', 'test_point')
-        .attr('cy', vis.height/2)
-        .attr('cx', d=>vis.width/2)
-        .attr("stroke", "black") // color of the line
-        .attr("stroke-width", 2)
-        .attr('r', d=>d.sy_dist/11.33*2)
-        .attr("stroke-dasharray", "5,5")
-        .attr("fill","none");
+    vis.chart.selectAll("text2")
+      .data(vis.data)
+      .enter()
+      .append("text")
+      .attr("x",vis.width/2-150)
+      .attr("y", function(d, i) { return i * 200 + 75; })
+      .text(function(d) { 
+        return "Size of the Planet: " + d.pl_rade+"[Earth Radius]";
+      })
+      .attr("font-size", "12px")
+      .attr("fill", "black");
 
-    vis.circles=vis.chart.selectAll('.point')
-        .data(vis.data)
-        .enter()
-        .append('circle')
-        .attr('class', 'point')
-        .attr('r', d=>d.pl_rade)
-        .attr('cy', vis.height/2)
-        .attr('cx', d=>vis.width/2+d.sy_dist/11.33*2) // to mange 8500 max d.sy_dist into 750 space 
-        .attr('fill', 'blue')
-        .attr('stroke-width', 2)
-        .attr('stroke', 'black')
-        .attr('opacity',0.5);
+    vis.chart.selectAll("text3")
+      .data(vis.data)
+      .enter()
+      .append("text")
+      .attr("x", vis.width/2-150)
+      .attr("y", function(d, i) { return i * 200 + 100; })
+      .text(function(d) { 
+        return "Size of the Star " + d.st_rad + "[Solar Mass]"; 
+      })
+      .attr("font-size", "12px")
+      .attr("fill", "black");
     
-    vis.circles
-          .on('mouseover', (event,d) => {
-            d3.select('#tooltip')
-            .style('display', 'block')
-            .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
-            .style('top', (event.pageY + vis.config.tooltipPadding) + 'px')
-            .html(` 
-              <div class="tooltip-title">Planet Radius: ${d.pl_rade}</div>
-            `)
-          });
-
-    vis.sun_circles
-          .on('mouseover', (event,d) => {
-            d3.select('#tooltip')
-            .style('display', 'block')
-            .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
-            .style('top', (event.pageY + vis.config.tooltipPadding) + 'px')
-            .html(` 
-              <div class="tooltip-title">Star Radius: ${vis.data[0].st_rad}</div>
-            `)
-          });
-
-    vis.line
-          .on('mouseover', (event,d) => {
-            d3.select('#tooltip')
-            .style('display', 'block')
-            .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
-            .style('top', (event.pageY + vis.config.tooltipPadding) + 'px')
-            .html(` 
-              <div class="tooltip-title">Distance from Star: ${d.sy_dist}</div>
-            `)
-          });
+    vis.chart.selectAll("text4")
+      .data(vis.data)
+      .enter()
+      .append("text")
+      .attr("x", vis.width/2-150)
+      .attr("y", function(d, i) { return i * 200 + 125; })
+      .text(function(d) { 
+        if(d.st_spectype.charAt(0) =="A" )
+        {
+          return "Star Type: A"; 
+        }
+        else if(d.st_spectype.charAt(0) =="F" )
+        {
+          return "Star Type: F"; 
+        }
+        else if(d.st_spectype.charAt(0) =="G" )
+        {
+          return "Star Type: G"; 
+        }
+        else if(d.st_spectype.charAt(0) =="K" )
+        {
+          return "Star Type: K"; 
+        }
+        else if(d.st_spectype.charAt(0) =="M" )
+        {
+          return "Star Type: M"; 
+        }
+        
+      })
+      .attr("font-size", "12px")
+      .attr("fill", "black");
     
-    vis.test_circle
-          .on('mouseover', (event,d) => {
-            d3.select('#tooltip')
-            .style('display', 'block')
-            .style('left', (event.pageX + vis.config.tooltipPadding) + 'px')   
-            .style('top', (event.pageY + vis.config.tooltipPadding) + 'px')
-            .html(` 
-              <div class="tooltip-title">Orbital Semi-major axis: ${d.pl_orbsmax} Eccentricity: ${d.pl_orbeccen}  </div>
-            `)
-          });
-    /*
-    vis.ellipses = vis.chart.selectAll('.ellipse')
-        .data(vis.data)
-        .enter()
-        .append('ellipse')
-        .attr('class', 'ellipse')
-        .attr('rx', d => Math.log(d.pl_orbsmax*206625)) // semi-major axis and change of data from pc to au
-        .attr('ry', d => Math.log(d.pl_orbsmax*206625)* Math.sqrt(1 - d.pl_orbeccen ** 2)) // semi-minor axis
-        .attr('cx', d=>vis.width/2)
-        .attr('cy', vis.height/2)
-        .attr('fill', 'none')
-        .attr('stroke-width', 2)
-        .attr('stroke', 'black');
-        //.attr('transform', d => `rotate(${d.pl_orbincl} ${vis.width/2},${vis.height/2})`);
-    */
-    vis.renderVis()
-
+    vis.chart.selectAll("text5")
+      .data(vis.data)
+      .enter()
+      .append("text")
+      .attr("x", vis.width/2-150)
+      .attr("y", function(d, i) { return i * 200 + 150; })
+      .text(function(d) { 
+        return "Distance from planet to Start: " + d.sy_dist+"[pc]";
+      })
+      .attr("font-size", "12px")
+      .attr("fill", "black");
+    
+    vis.chart.selectAll("text6")
+      .data(vis.data)
+      .enter()
+      .append("text")
+      .attr("x", vis.width/2-150)
+      .attr("y", function(d, i) { return i * 200 + 175; })
+      .text(function(d) { 
+        if(d.pl_bmasse<=0.00001)
+        {
+          return "Planet Type: Asteroidan"; 
+        }
+        else if(d.pl_bmasse>0.00001 && d.pl_bmasse<=0.1)
+        {
+          return "Planet Type: Mercurian"; 
+        }
+        else if(d.pl_bmasse>0.1 && d.pl_bmasse<=0.5 )
+        {
+          return "Planet Type: Subterran"; 
+        }
+        else if(d.pl_bmasse>0.5 && d.pl_bmasse<=2)
+        {
+          return "Planet Type: Terran (Earths)"; 
+        }
+        else if(d.pl_bmasse>2 && d.pl_bmasse<=10)
+        {
+          return "Planet Type: Superterran(Super-Earths)"; 
+        }
+        else if(d.pl_bmasse>10 && d.pl_bmasse<=50)
+        {
+          return "Planet Type: Neptunian (Neptunes)"; 
+        }
+        else if(d.pl_bmasse>50 && d.pl_bmasse<=5000)
+        {
+          return "Planet Type: Jovian (Jupiters)"; 
+        }
+        else
+        {
+          return "Planet Type: Undefined"
+        }
+      })
+      .attr("font-size", "12px")
+      .attr("fill", "black");
   }
 
   renderVis(){
