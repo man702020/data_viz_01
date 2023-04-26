@@ -132,7 +132,7 @@ class Histogram{
         .style('opacity', 1)
         .attr('class', 'bar')
         .attr('x',d=>vis.xScale(vis.xValue(d)))
-        .attr('width', vis.xScale.bandwidth()+10)
+        .attr('width', vis.xScale.bandwidth()+7)
         .attr('height', d => vis.height - vis.yScale(vis.yValue(d)))
         .attr('y', d => vis.yScale(vis.yValue(d)))
         .attr('fill', '#9370DB')

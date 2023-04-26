@@ -442,7 +442,7 @@ d3.csv('data/Exoplanets.csv')
     histogram=new Histogram({
       'parentElement': '#histogram',
       'containerHeight': 300,
-      'containerWidth': 800
+      'containerWidth': 700
     },graph6);
     
     console.log(discPerYear);

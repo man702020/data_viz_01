@@ -52,7 +52,7 @@ class BarChartType{
       .attr('y', vis.config.margin.top / 2)
       .style('text-anchor', 'middle')
       .style('font-weight', 'bold')
-      .text('Distribution of Spectral System');
+      .text('Type of Spectral System');
     // SVG Group containing the actual chart; D3 margin convention
     vis.chart = vis.svg.append('g')
         .attr('transform', `translate(${vis.config.margin.left},${vis.config.margin.top})`);
@@ -74,7 +74,7 @@ class BarChartType{
         .attr('x', vis.width / 2)
         .attr('y', vis.height + 40)
         .style('text-anchor', 'middle')
-        .text('Type of Spectral System');
+        .text('Type of System');
 
       // Add y-axis label
       vis.chart.append('text')
