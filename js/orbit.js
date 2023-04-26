@@ -60,22 +60,164 @@ class orbitPlot {
       test_data=['Stars: 1','Stars: 2', 'Stars: 3', 'Stars: 4']
     }
 
-    vis.sun_circles=vis.chart.selectAll('.sun_point')
-        .data(test_data)
+    let j= vis.data[0].sy_snum;
+
+      if(j==1)
+      {
+        vis.sun_circles=vis.chart.selectAll('.sun_point')
+        .data(vis.data)
         .enter()
         .append('circle')
         .attr('class', 'sun_point')
-        .attr('r', d=> Math.log(vis.data[0].st_rad*695700)*5)
-        .attr('cy', vis.height/2)
-        .attr('cx', d=>vis.width/2)
+        .attr('r', function(d, i) {return Math.log(vis.data[i].st_rad*695700)*5} )
+        .attr('cy', vis.height/2) 
+        .attr('cx', vis.width/2)
         .attr('fill', 'orange')
         .attr('stroke-width', 2)
         .attr('stroke', 'black')
-        .attr('opacity',0.5);
-     
-     
+        .attr('opacity',0.5); 
+      }
+      else if (j==2)
+      {
+        vis.sun_circles=vis.chart.selectAll('.sun_point')
+        .data(vis.data)
+        .enter()
+        .append('circle')
+        .attr('class', 'sun_point')
+        .attr('r', function(d, i) {return Math.log(vis.data[i].st_rad*695700)*5} )
+        .attr('cy', vis.height/2) 
+        .attr('cx', vis.width/2)
+        .attr('fill', 'orange')
+        .attr('stroke-width', 2)
+        .attr('stroke', 'black')
+        .attr('opacity',0.5); 
 
+        vis.sun_circles1=vis.chart.selectAll('.sun_point1')
+        .data(vis.data)
+        .enter()
+        .append('circle')
+        .attr('class', 'sun_point1')
+        .attr('r', function(d, i) {return Math.log(vis.data[i].st_rad*695700)*5} )
+        .attr('cy', 1*200+vis.height/2) 
+        .attr('cx', vis.width/2)
+        .attr('fill', 'orange')
+        .attr('stroke-width', 2)
+        .attr('stroke', 'black')
+        .attr('opacity',0.5); 
+      }
+      else if (j==3)
+      {
+        vis.sun_circles=vis.chart.selectAll('.sun_point')
+        .data(vis.data)
+        .enter()
+        .append('circle')
+        .attr('class', 'sun_point')
+        .attr('r', function(d, i) {return Math.log(vis.data[i].st_rad*695700)*5} )
+        .attr('cy', vis.height/2) 
+        .attr('cx', vis.width/2)
+        .attr('fill', 'orange')
+        .attr('stroke-width', 2)
+        .attr('stroke', 'black')
+        .attr('opacity',0.5); 
 
+        vis.sun_circles1=vis.chart.selectAll('.sun_point1')
+        .data(vis.data)
+        .enter()
+        .append('circle')
+        .attr('class', 'sun_point1')
+        .attr('r', function(d, i) {return Math.log(vis.data[i].st_rad*695700)*5} )
+        .attr('cy', 1*200+vis.height/2) 
+        .attr('cx', vis.width/2)
+        .attr('fill', 'orange')
+        .attr('stroke-width', 2)
+        .attr('stroke', 'black')
+        .attr('opacity',0.5); 
+
+        vis.sun_circles1=vis.chart.selectAll('.sun_point2')
+        .data(vis.data)
+        .enter()
+        .append('circle')
+        .attr('class', 'sun_point2')
+        .attr('r', function(d, i) {return Math.log(vis.data[i].st_rad*695700)*5} )
+        .attr('cy', 2*200+vis.height/2) 
+        .attr('cx', vis.width/2)
+        .attr('fill', 'orange')
+        .attr('stroke-width', 2)
+        .attr('stroke', 'black')
+        .attr('opacity',0.5); 
+      }
+      else
+      {
+        vis.sun_circles=vis.chart.selectAll('.sun_point')
+        .data(vis.data)
+        .enter()
+        .append('circle')
+        .attr('class', 'sun_point')
+        .attr('r', function(d, i) {return Math.log(vis.data[i].st_rad*695700)*5} )
+        .attr('cy', vis.height/2) 
+        .attr('cx', vis.width/2)
+        .attr('fill', 'orange')
+        .attr('stroke-width', 2)
+        .attr('stroke', 'black')
+        .attr('opacity',0.5); 
+
+        vis.sun_circles1=vis.chart.selectAll('.sun_point1')
+        .data(vis.data)
+        .enter()
+        .append('circle')
+        .attr('class', 'sun_point1')
+        .attr('r', function(d, i) {return Math.log(vis.data[i].st_rad*695700)*5} )
+        .attr('cy', 1*200+vis.height/2) 
+        .attr('cx', vis.width/2)
+        .attr('fill', 'orange')
+        .attr('stroke-width', 2)
+        .attr('stroke', 'black')
+        .attr('opacity',0.5); 
+
+        vis.sun_circles1=vis.chart.selectAll('.sun_point2')
+        .data(vis.data)
+        .enter()
+        .append('circle')
+        .attr('class', 'sun_point2')
+        .attr('r', function(d, i) {return Math.log(vis.data[i].st_rad*695700)*5} )
+        .attr('cy', 2*200+vis.height/2) 
+        .attr('cx', vis.width/2)
+        .attr('fill', 'orange')
+        .attr('stroke-width', 2)
+        .attr('stroke', 'black')
+        .attr('opacity',0.5); 
+
+        vis.sun_circles1=vis.chart.selectAll('.sun_point3')
+        .data(vis.data)
+        .enter()
+        .append('circle')
+        .attr('class', 'sun_point3')
+        .attr('r', function(d, i) {return Math.log(vis.data[i].st_rad*695700)*5} )
+        .attr('cy', 3*200+vis.height/2) 
+        .attr('cx', vis.width/2)
+        .attr('fill', 'orange')
+        .attr('stroke-width', 2)
+        .attr('stroke', 'black')
+        .attr('opacity',0.5); 
+      }
+
+    /*function(d, i) { 
+        if(vis.data[0].sy_snum==1) { 
+        return vis.height/2
+        }
+        else if(vis.data[0].sy_snum==2)
+        {
+          return 1* 200 + vis.height/2
+        }
+        else if(vis.data[0].sy_snum==3)
+        {
+          return i* 200 + vis.height/2
+        }
+        else 
+        {
+          return 3* 200 + vis.height/2
+        }
+      }*/
     vis.line = vis.chart.append("line")
         .data(vis.data)
         .attr("x1", vis.width/2) // x-coordinate of starting point
@@ -91,7 +233,7 @@ class orbitPlot {
         .enter()
         .append('circle')
         .attr('class', 'test_point')
-        .attr('cy', vis.height/2)
+        .attr('cy', function(d, i) {return i * 200 + vis.height/2})
         .attr('cx', d=>vis.width/2)
         .attr("stroke", "black") // color of the line
         .attr("stroke-width", 2)
@@ -105,7 +247,7 @@ class orbitPlot {
         .append('circle')
         .attr('class', 'point')
         .attr('r', d=>Math.log(d.pl_rade*6378.14)*5)
-        .attr('cy', vis.height/2)
+        .attr('cy', function(d, i) {return i * 200 + vis.height/2})
         .attr('cx', d=>vis.width/2+Math.log(d.sy_dist*3.86*10^13)*5)//d.sy_dist/11.33*2) // to mange 8500 max d.sy_dist into 750 space 
         .attr('fill', 'blue')
         .attr('stroke-width', 2)
