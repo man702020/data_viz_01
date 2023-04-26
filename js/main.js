@@ -82,12 +82,12 @@ d3.csv('data/Exoplanets.csv')
     {xValue : "Radial Velocity", yValue : 0},
     {xValue : "Microlensing", yValue : 0},
     {xValue : "Imaging", yValue : 0},
-    {xValue : "Transit Timing Variations", yValue : 0},
-    {xValue : "Eclipse Timing Variations", yValue : 0},
-    {xValue : "Orbital Brightness Modulation", yValue : 0},
+    {xValue : "Transit Timing", yValue : 0},
+    {xValue : "Eclipse Timing", yValue : 0},
+    {xValue : "Orbital Modulation", yValue : 0},
     {xValue : "Pulsar Timing", yValue : 0},
     {xValue : "Astrometry", yValue : 0},
-    {xValue : "Pulsation Timing Variations", yValue : 0},
+    {xValue : "Pulsation Timing", yValue : 0},
     {xValue : "Disk Kinematics", yValue : 0},
     ];
 

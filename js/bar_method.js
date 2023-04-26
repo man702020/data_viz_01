@@ -121,9 +121,13 @@ class BarChartMethod{
     vis.yScale.domain([1, d3.max(vis.data, vis.yValue)]);
 
 
-            //vis.xAxisG.call(vis.xAxis);
+    //vis.xAxisG.call(vis.xAxis);
     vis.yAxisG.call(vis.yAxis);
     
+    vis.colorScale = d3.scaleOrdinal()
+    .domain(vis.data.map(d => d.xValue))
+    .range(d3.schemeSet2);
+
     vis.renderVis();
     
  }
@@ -132,6 +136,7 @@ class BarChartMethod{
  //leave this empty for now...
  renderVis() { 
         let vis = this;
+
 
 
     // Add rectangles
@@ -147,9 +152,36 @@ class BarChartMethod{
         .attr('width', vis.xScale.bandwidth())
         .attr('height', d => vis.height - vis.yScale(vis.yValue(d)))
         .attr('y', d => vis.yScale(vis.yValue(d)))
-        .attr('fill','#808080')
+        .attr('fill', d => vis.colorScale(d.xValue));
+        //.attr('fill','#808080')
         //.attr("transform", "rotate(90)")
 
+      var legendCircles = vis.chart.selectAll('.legend-circle')
+        .data(vis.data)
+        .enter()
+        .append('circle')
+        .attr('class', 'legend-circle')
+        .attr('r', 6) // Set the radius of the circles to 6 pixels
+        .attr('cx', vis.width+17) // Set the x-coordinate of the circles
+        .attr('cy', function(d, i) { return 0 + i * 20; }) // Set the y-coordinate of the circles
+        .style('fill', function(d) { return vis.colorScale(d.xValue); }); // Set the fill color of the circles using the color scale
+    
+    var legendLabels = vis.chart.selectAll('.legend-label')
+        .data(vis.data)
+        .enter()
+        .append('text')
+        .attr('class', 'legend-label')
+        .attr('x', vis.width + 27) // Set the x-coordinate of the labels
+        .attr('y', function(d, i) { return 0+ i * 20; }) // Set the y-coordinate of the labels
+        .attr('dy', '0.3em') // Adjust the vertical alignment of the labels
+        .text(function(d) { return d.xValue; }); // Set the text of the labels to the data item
+
+        
+     // Style the labels
+    legendLabels
+       .style('font-size', '12px')
+        .style('fill', function(d) { return vis.colorScale(d.xValue); })
+        .style('text-anchor', 'start'); 
     
     bars.on("click", function(d) {
         window.location.href = "https://en.wikipedia.org/wiki/Methods_of_detecting_exoplanets";
