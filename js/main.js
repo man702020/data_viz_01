@@ -1,6 +1,7 @@
 console.log("Hello world");
-let data, lineChart, barChart1, barChart2, barChart3, barChart4, barChart5, scatterPlot, histogram,graph1;
+let data, lineChart, barChart1, barChart2, barChart3, barChart4, barChart5, scatterPlot, histogram,graph1,graph2,graph3,graph4,graph5,graph6;
 let max_value, min_value;
+let discPerYear; 
 
 d3.csv('data/Exoplanets.csv')
   .then(_data => {
@@ -44,7 +45,7 @@ d3.csv('data/Exoplanets.csv')
 
         //console.log(minYear);
         //console.log(maxYear); 
-    let discPerYear = []; //this will be our data for the line chart
+    discPerYear = []; //this will be our data for the line chart
     for(let i = minYear; i < maxYear; i++){
           
           let counter=0;
@@ -66,7 +67,7 @@ d3.csv('data/Exoplanets.csv')
       {xValue : 4, yValue : 0}
       ];
 
-    let graph2=[
+    graph2=[
       {xValue : 1, yValue : 0},
       {xValue : 2, yValue : 0},
       {xValue : 3, yValue : 0},
@@ -77,7 +78,7 @@ d3.csv('data/Exoplanets.csv')
       {xValue : 8, yValue : 0}
       ];
     
-    let graph3=[
+    graph3=[
     {xValue : "Transit", yValue : 0},
     {xValue : "Radial Velocity", yValue : 0},
     {xValue : "Microlensing", yValue : 0},
@@ -91,7 +92,7 @@ d3.csv('data/Exoplanets.csv')
     {xValue : "Disk Kinematics", yValue : 0},
     ];
 
-    let graph4=[
+    graph4=[
       {xValue : "A", yValue:0, linkurl:"https://en.wikipedia.org/wiki/Stellar_classification#Class_A"},
       {xValue : "F", yValue:0, linkurl:"https://en.wikipedia.org/wiki/Stellar_classification#Class_F"},
       {xValue : "G", yValue:0, linkurl:"https://en.wikipedia.org/wiki/Stellar_classification#Class_G"},
@@ -99,7 +100,7 @@ d3.csv('data/Exoplanets.csv')
       {xValue : "M", yValue:0, linkurl:"https://en.wikipedia.org/wiki/Stellar_classification#Class_M"},
     ];
 
-    let graph5=[
+    graph5=[
         {'xValue': "A", 'yValue':0, 'zValue':0 }, 
         {'xValue': "F", 'yValue':0, 'zValue':0 }, 
         {'xValue': "G", 'yValue':0, 'zValue':0 }, 
@@ -107,7 +108,7 @@ d3.csv('data/Exoplanets.csv')
         {'xValue': "M", 'yValue':0, 'zValue':0 }, 
     ];
     
-    let graph6=[
+    graph6=[
       {xValue : 270, yValue : 0},
       {xValue : 810, yValue : 0},
       {xValue : 1350, yValue : 0},
@@ -126,6 +127,36 @@ d3.csv('data/Exoplanets.csv')
       {xValue : 8370, yValue: 0}
     ];
 
+    
+
+    //console.log(graph6);
+
+    let table = $('#my-table tbody');
+
+    
+    data.forEach((d) => {
+      let row = $('<tr>');
+      row.append($('<td>').text(d.sys_name));
+      row.append($('<td>').text(d.sy_snum));
+      row.append($('<td>').text(d.sy_pnum));
+      row.append($('<td>').text(d.discoverymethod));
+      row.append($('<td>').text(d.disc_year));
+      row.append($('<td>').text(d.st_spectype)); 
+      row.append($('<td>').text(d.st_rad)); 
+      row.append($('<td>').text(d.st_mass));    
+      row.append($('<td>').text(d.sy_dist));    
+      table.append(row);
+    });
+
+    // Add event listener for scrolling
+    $('.table-container').scroll(function() {
+      let distanceFromTop = $('.table-container').scrollTop();
+      let tableHeight = $('#my-table').height();
+      let containerHeight = $('.table-container').height();
+      if (distanceFromTop + containerHeight >= tableHeight) {
+        // Load more data or update the table
+      }
+    });
     data.forEach(d=>{
       if(d.sy_snum==1)
       {
@@ -143,7 +174,7 @@ d3.csv('data/Exoplanets.csv')
       {
         graph1[3].yValue=graph1[3].yValue + 1;
       }
-
+  
       if(d.sy_pnum==1)
       {
         graph2[0].yValue=graph2[0].yValue + 1;
@@ -176,7 +207,7 @@ d3.csv('data/Exoplanets.csv')
       {
         graph2[7].yValue=graph2[7].yValue + 1;
       }
-
+  
       if(d.discoverymethod =="Transit")
       {
         graph3[0].yValue=graph3[0].yValue + 1;
@@ -221,7 +252,7 @@ d3.csv('data/Exoplanets.csv')
       {
         graph3[10].yValue=graph3[10].yValue + 1;
       } 
-
+  
       if(d.st_spectype.charAt(0) =="A" )
       {
         graph4[0].yValue=graph4[0].yValue + 1;
@@ -242,7 +273,7 @@ d3.csv('data/Exoplanets.csv')
       {
         graph4[4].yValue=graph4[4].yValue + 1;
       }
-
+  
       
       if(d.st_spectype.charAt(0) =="A" )
       {
@@ -368,58 +399,21 @@ d3.csv('data/Exoplanets.csv')
         graph6[15].yValue=graph6[15].yValue+1;
       }
     });
-
-
-    //console.log(graph6);
-
-    let table = $('#my-table tbody');
-
-    
-    data.forEach((d) => {
-      let row = $('<tr>');
-      row.append($('<td>').text(d.sys_name));
-      row.append($('<td>').text(d.sy_snum));
-      row.append($('<td>').text(d.sy_pnum));
-      row.append($('<td>').text(d.discoverymethod));
-      row.append($('<td>').text(d.disc_year));
-      row.append($('<td>').text(d.st_spectype)); 
-      row.append($('<td>').text(d.st_rad)); 
-      row.append($('<td>').text(d.st_mass));    
-      row.append($('<td>').text(d.sy_dist));    
-      table.append(row);
-    });
-
-    // Add event listener for scrolling
-    $('.table-container').scroll(function() {
-      let distanceFromTop = $('.table-container').scrollTop();
-      let tableHeight = $('#my-table').height();
-      let containerHeight = $('.table-container').height();
-      if (distanceFromTop + containerHeight >= tableHeight) {
-        // Load more data or update the table
-      }
-    });
-
-    //console.log(graph1);
-    //console.log(graph2); 
-    //console.log(graph3); 
-    //console.log(graph4); 
-    //console.log(graph5); 
-    //console.log(discPerYear);  
-
+  
     barChart1= new BarChartStar({
       'parentElement' : '#bar1',
       'containerHeight': 300,
       'containerWidth': 400,
     },graph1);
-
-
+  
+  
     barChart2= new BarChartPlanet({
       'parentElement' : '#bar2',
       'containerHeight': 300,
       'containerWidth': 400
     },graph2);
-
-
+  
+  
     barChart4= new BarChartType({
       'parentElement' : '#bar4',
       'containerHeight': 300,
@@ -431,7 +425,7 @@ d3.csv('data/Exoplanets.csv')
       'containerHeight': 300,
       'containerWidth': 500
     },graph3);
-
+  
     barChart5= new BarChartGroup({
       'parentElement' : '#bar5',
       'containerHeight': 300,
@@ -451,13 +445,21 @@ d3.csv('data/Exoplanets.csv')
       'containerHeight': 400,
       'containerWidth': 700
       }, discPerYear); 
-
+  
     scatterPlot= new ScatterPlot({
       'parentElement' : '#scatterplot',
       'containerHeight': 400,
       'containerWidth': 800
     }, data);
+    //console.log(graph1);
+    //console.log(graph2); 
+    //console.log(graph3); 
+    //console.log(graph4); 
+    //console.log(graph5); 
+    //console.log(discPerYear);  
 
+
+    
 })
 .catch(error => {
     console.error('Error loading the data'+error);

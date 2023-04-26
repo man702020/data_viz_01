@@ -155,6 +155,9 @@ class BarChartStar{
         })
         .on('mouseleave', () => {
           d3.select('#tooltip').style('display', 'none');
+        })
+        .on('click', (_event, d) => {
+          console.log('Filter of Data');
         });
 
     vis.xAxisG.call(vis.xAxis);
