@@ -8,7 +8,7 @@ Project information can also be found in the [`/general-info`](./general-info) d
 
 ## Proejct Member
 
-- Manish Raj Aryal
+- Manish Raj Aryal (Group Member)
 
 ## Running the application
 
